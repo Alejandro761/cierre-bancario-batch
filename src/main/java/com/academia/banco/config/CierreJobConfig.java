@@ -41,13 +41,30 @@ public class CierreJobConfig {
                 })
                 .build();
     }
+    
+    // Otro Tasklet: revisa que exista el archivo de movimientos de la fecha que recibió el Job.
+    @Bean
+    public Step contarArchivosStep(JobRepository jobRepository) {
+        return new StepBuilder("contarArchivosStep", jobRepository)
+                .tasklet((contribution, chunkContext) -> {
+                    Path datosDirectory = Path.of("datos");
+                    if (!Files.exists(datosDirectory)) {
+                        throw new IllegalStateException("No existe la carpeta: " + datosDirectory);
+                    }
+                    long filesCount = Files.list(datosDirectory).count();
+                    System.out.println(">>> Número de archivos en la carpeta datos/: " + filesCount);
+                    return RepeatStatus.FINISHED;
+                })
+                .build();
+    }
 
     // El Job: el contenedor de los steps. Primero el saludo, después la revisión del archivo.
     @Bean
-    public Job cierreDelDiaJob(JobRepository jobRepository, Step saludoStep, Step verificarArchivoStep) {
+    public Job cierreDelDiaJob(JobRepository jobRepository, Step saludoStep, Step verificarArchivoStep, Step contarArchivosStep) {
         return new JobBuilder("cierreDelDiaJob", jobRepository)
                 .start(saludoStep)
                 .next(verificarArchivoStep)
+                .next(contarArchivosStep)
                 .build();
     }
 }
