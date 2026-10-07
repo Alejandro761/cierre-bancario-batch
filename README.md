@@ -55,3 +55,27 @@
 5. Mi predicción de la MP-3, paso 1: ¿qué habría pasado sin el Procesador?
 
     Habrían más tipos de movimientos ya que en el csv hay filas las cuales su tipo está en mayúscula o minúsculas y con espacios al principio. El procesador ayuda a evitar esto, realizando la limpieza necesaria antes de que el escritor los inserte a la base de datos.
+
+## Día 3 · Parámetros, fallas y reinicio
+
+### Boleto de salida
+
+1. ¿Qué diferencia hay entre una JobInstance y una JobExecution? Usa como ejemplo el cierre del 25.
+
+    Una JobInstance es una instancia del job definida por sus parámetros, mientras que JobExecution es un intento de ejecución de la instancia. En el caso del cierre del 25, como la primera ejecución de esa instancia falló, permitió hacer otra ejecución relacionada a la misma instancia que terminó correctamente.
+
+2. ¿En qué caso Spring Batch se niega a correr un cierre, y en qué caso lo reinicia?
+
+    Se niega cuando ya existe una ejecución que terminó bien con los mismos parámetros (misma instancia). Lo reinicia cuando la ejecución de una instancia falló.
+
+3. En el reinicio del día 5, ¿por qué el step de carga leyó 10 movimientos y no 20?
+
+    Porque en la primera ejecución, el primer chunk alcanzó a leer los primeros 10 movimientos, pero el segundo chunk falla al leer el movimiento 14 y se deshace. En el reinicio Spring ya sabe que el primer chunk  procesó y guardó correctamente los primeros 10 movimientos en la base de datos, por lo que reanuda el job en el segundo chunk con los 10 movimientos restantes.
+
+4. ¿Qué diferencia hay entre un movimiento **filtrado** y uno **omitido**?
+
+    Filtrado son los movimientos que pasaron por una condicional if en el procesador, los omitidos son los movimientos que escapan de los filtros del procesador y generan un error al venir en un formato incorrecto, los cuales se van a ignorar (se debe definir la cantidad de omitidos tolerados).
+
+5. ¿Por qué importa el código de salida, si el estado ya queda en las tablas?
+
+    Los código de sálida dan mucho información acerca del proceso del job, sobretodo cuando el job falla, ya que el código de salida indica el tipo de error.
