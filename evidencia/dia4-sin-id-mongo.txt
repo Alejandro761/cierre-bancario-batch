@@ -1,0 +1,16 @@
+30
+[
+  {
+    _id: '1001',
+    saldo: Decimal128('8053.00'),
+    movimientos: Long('32'),
+    _class: 'com.academia.banco.model.SaldoCuenta'
+  },
+  {
+    _id: ObjectId('6ac7ed13f88e3eb459e681d1'),
+    cuenta: '1001',
+    saldo: Decimal128('8053.00'),
+    movimientos: Long('32'),
+    _class: 'com.academia.banco.model.SaldoCuenta'
+  }
+]
