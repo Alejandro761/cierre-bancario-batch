@@ -100,6 +100,12 @@
 
     Spring Batch MongoDB es para que Batch guarde sus propias tablas, pero nosotros ya estamos utilizando MySQL. Con Spring Boot MongoDB nosotros podemos crear tablas y guardar registros, en este caso guardamos las cuentas y su saldo.
 
+### Resultado del reto: 
+
+29 | 2026-10-22 | publicarSaldosStep    | COMPLETED |         15 |            5 |          10 |          0 |            5 |              0 |
+
+FILTER_COUNT salió en 5, es decir, se filtraron 5 cuentas con saldos negativos. Lo que haría con los documentos viejos sería borrarlos con un nuevo step que lea la base de datos de las cuentas, después el procesador encuentre las negativas y las retorne para que el escritor las elimine.
+
 ## Lo que aprendí esta semana
 
 Aprendí que un proceso batch es un proceso por lotes, es decir, se dividen varias tareas en bloques y se ejecutan. Un job representa un procesamiento el cuál está definido por sus parámetros. El Job se compone de step que son los pasos que va a ejecutar, cada step puede tener un lector y un escritor para leer y escribir respectivamente en archivos o bases de datos. Cuando falla un Job Spring lo alamacená en la base de datos y además permite visualizar el log que contiene el error específico y que línea lo generó. Spring permite volver a ejecutar el Job y lo reanuda en el Step que generó el error, evitando hacer todo desde el principio o duplicar datos.

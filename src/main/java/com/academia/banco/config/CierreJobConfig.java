@@ -1,5 +1,6 @@
 package com.academia.banco.config;
 
+import com.academia.banco.batch.CuentaProcesador;
 import com.academia.banco.batch.MovimientoProcessor;
 import com.academia.banco.model.Movimiento;
 import com.academia.banco.model.SaldoCuenta;
@@ -127,6 +128,7 @@ public class CierreJobConfig {
                 .<SaldoCuenta, SaldoCuenta>chunk(3)
                 .transactionManager(transactionManager)
                 .reader(saldoReader)
+                .processor(new CuentaProcesador())
                 .writer(saldoWriter)
                 .build();
     }
