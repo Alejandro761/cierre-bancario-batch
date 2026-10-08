@@ -79,3 +79,27 @@
 5. ¿Por qué importa el código de salida, si el estado ya queda en las tablas?
 
     Los código de sálida dan mucho información acerca del proceso del job, sobretodo cuando el job falla, ya que el código de salida indica el tipo de error.
+
+## Día 4 · De MySQL a MongoDB
+
+### Boleto de salida
+
+1. ¿Qué hace cada uno de los tres steps de tu Job, y de qué tipo es cada uno?
+
+    El verificarArchivoStep de tipo tasklet verifica que exista el archivo del día y cuenta el número de movimientos que contiene. El cargarMovimientosStep de tipo Chunk lee cada movimiento (lector), lo procesa (procesador) y lo escribe en la base de datos (escritor) de 10 en 10, es decir, en chunks de 10. El publicarSaldosStep, también de tipo Chunk, lee la base de datos de los movimientos y cálcula el saldo de cada cuenta y lo inserta en una base de datos de mongo.
+
+2. ¿Por qué el cierre del 9 no duplicó los saldos, y el del 10 (sin `@Id`) sí?
+
+    Porque en día 9, está específicado que el id sera el número de la cuenta, así que solo busca si existe la cuenta (el id) en la base de datos y reemplaza el registro. En cambio, en el día 10, al quitarle la anotacios @Id a la cuenta, mongo crea un Id único y como no existe vuelve a crear un registro para esa cuenta en la base de datos.
+
+3. Al reiniciar el cierre del 11, ¿por qué no se cargó otra vez el archivo?
+
+    Porque el Step que se encarga de cargar el archivo del día se completo con éxito, batch permite realizar una nueva ejecución de esa misma instancia a partir del Step que falló (publicarSaldos) en la ejecución anterior reanudando el Job en vez de sobreescribirlo y duplicar la carga del archivo.
+
+4. ¿Qué diferencia hay entre `spring-boot-starter-data-mongodb` y «Spring Batch MongoDB» (`batch-data-mongodb`)?
+
+    Spring Batch MongoDB es para que Batch guarde sus propias tablas, pero nosotros ya estamos utilizando MySQL. Con Spring Boot MongoDB nosotros podemos crear tablas y guardar registros, en este caso guardamos las cuentas y su saldo.
+
+## Lo que aprendí esta semana
+
+Aprendí que un proceso batch es un proceso por lotes, es decir, se dividen varias tareas en bloques y se ejecutan. Un job representa un procesamiento el cuál está definido por sus parámetros. El Job se compone de step que son los pasos que va a ejecutar, cada step puede tener un lector y un escritor para leer y escribir respectivamente en archivos o bases de datos. Cuando falla un Job Spring lo alamacená en la base de datos y además permite visualizar el log que contiene el error específico y que línea lo generó. Spring permite volver a ejecutar el Job y lo reanuda en el Step que generó el error, evitando hacer todo desde el principio o duplicar datos.
