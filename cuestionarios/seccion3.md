@@ -1,41 +1,25 @@
-# 01 · Fundamentos: tipos, operadores y casting 
+# 03 · Strings y clases envoltorio
 
-1. El ciclo for mejorado, o foreach, funciona con arreglos y colecciones que implementan la interfaz Iterable.
+1. La opción b es correcta porque se crea una instancia de StringBuilder y con la funció append se concatena un string al final.
 
-2. La variable a no es igual ni mayor que b, por lo tanto, z queda en 0 y la multiplicación igual.
+2. La función replace es la encargada de reeemplazar todas las apariciones de un carácter dentro de un string.
 
-3. Mientras que el residuo de i dividido entre 2 sea 0, count incrementará su valor, dando como resultado final 5.
+3. La función equals es la encargada de comparar contenido, regresa true si ambas variables tienen la misma cadena de texto. El operador == compara objetos, por lo tanto no es una opción.
 
-4. Son dos for anidados, el externo itera 3 veces (del 1 al 3) y el segundo 2 veces (del 1 al 2), dando como resultado final 6 iteraciones (3 × 2).
+4. Se lanza la excepción StringIndexOutOfBoundsException, el cual significa que no existe ese índice ya que se sobrepasa al último.
 
-5. El número de ejecuciones se puede cálcular multiplicando el número de iteraciones de cada for anidado, ya que hay un solo print dentro del for mas interno. La multiplicación estaría compuesta de la siguiente forma: 4 × 3 × 2, dando como resultado un total de 24 prints.
+5. Un objeto String es inmutable, una vez creado su valor no puede cambiar. La función toUpperCase genera un nuevo objeto String, no modifica s. El nuevo String en mayúsculas no se está asignando a ninguna variable, por lo tanto, msg sigue apuntando al mismo String.
 
-6. La variable ii nunca cambia y la condición del while se cumple, por lo tanto el programa entra en un bucle infinito en la ejecución.
+6. Las funciones concat y substring no modifican la variable a, retornan una nueva cadena. Por lo tanto, la opción correcta es a.
 
-7. El código no compila al momento de validar la condición del while porque el valor no retorna un booleano.
+7. Los dos primeros prints muestran true, ya que equals compara los valores de los strings, los dos print restantes muestran false porque el operador == compara objetos y los tres son diferentes objetos.
 
-8. Con kk = 11, el for itera cinco veces haciendo cumplir la condición ii >> 6 cinco veces y a su vez incrementando esa misma cantidad de veces el valor de jj.
+8. Al usar el operador new, se crea un nuevo objeto String en la memoria Heap. Al declarar una cadena literal, Java crea el String en el String Pool. El método intern bysca la cadena en el Strign Pool y como existe deuvelve la referencia que tiene str2, por lo tanto, str2 y str3 apuntan al mismo objeto en el String Pool.
 
-9. Cuando i es par se suma num con el elemento iterado de arr, y cuando i es impar se resta num con el elemento de arr.
+9. La primera operación es verdadera porque s1 y s3 son literales de cadena ("text") y el compilador de Java utiliza el String Pool para reutilizar la misma referencia de objeto. La segunda operación es falsa porque s2 se creo usando new, el cual crea el objeto en la memoria Heap. La tercera operación es verdadera porque intern devuelve la referencia de la cadena "text" en el String Pool, coincidiendo la referencia de s1 con s4.
 
-10. La primera condición se cumple, value es mayor que cero, la próxima condición a cumplirse es la de value es diferente que cero, después se cumple que value es mayor que 30 y finalmente se cumple la condición de que value es mayor que 10.
+10. La función split separa el string en un arreglo, tomando como separador cualquier carácter que no sea dígito ("\\D"). El foreach itera el arreglo e imprime cada elemento, los cuales son números.
 
-11. El primer caso se cumple ("Red"), sin embargo, este no contiene un break despues del print, por lo que ejecuta los siguientes casos, sin validar la condición, hasta que encuentre un break, haciendo la ejecución de todos los casos menos el default porque el último (White) contiene break.
+11. Al declarar un Integer sin inicializarlo toma null, por lo tanto, dará error en la ejecución, lanzando la excepción A NullPointerException occurs at runtime cuando en la línea 5 se trate de suma un entero con un null.
 
-12. El primer caso se cumple e incrementa a y, pero como no tiene break ejecuta los demás casos sin validar la condición, realizando las sumas correspondientes a y.
-
-13. El segundo caso se cumple para grade, pero como no tiene break ejecuta los demás casos sin validar la condición, imprimiendo BCF.
-
-14. El segundo caso se cumple para grade, pero como no tiene break ejecuta el siguiente caso sin validar la condición imprimiendo BC. Como el case 'C' si contó con break, ya no se ejecutan los demás casos.
-
-15. En la condición del while x cuenta con un postincremento, llegando al valor 6 ya que el while valida la condición hasta que esta sea falsa y al llegar a 5 < 5 se realiza un último incremento a x. El operador ternario es verdadero (6 > 5) y retorna "greater than".
-
-16. 2 solo se imprime en la tercera iteración del for, ya que ii se inicia en 0 y se incrementa por cada elemento existente en table, un array de string de tamaño 3.
-
-17. Para un if la asignación de un booleano a false en los parentesís resulta en un falso, es como si se hiciera if (false), por lo tanto no se cumple ninguna condición, entrando al bloque del else.
-
-18. La función equals devuelve un booleano y se usa para comparar el contenido de dos strings. Asignar un valor a un entero no devuelve un booleano. Los tipos primitivos no tienen funciones como compareTo.
-
-19. Cada vez que se ejecuta test se incrementa el valor de co. En total se ejecuta ocho veces, dejando a co en esa misma cantidad. El for se itera dos veces porque depende de i, el cual vale 1 y verifica que i es igual o menor a 2 (test siempre regresa true). test se ejecuta una vez en la incialización del for, 3 veces en la condición, 2 veces en el cuerpo y 2 veces en la actualización.
-
-20. El bucle más interno es el while, el cuál reliza la impresión de los números con la variable k. La variable z es parte de la condición para romper el while, esta debe iniciar con 4 para que se cumpla 4 veces la condición y se impriman los números 1 2 3 4. El do while compara j con z para imprimir un salto de línea, al z iniciarse con 3, se asegura que el do se ejecute tres veces hasta que no se cumpla el while. En la segunda iteración de i, se ejcuta una vez más el do y se imprime la fila de los números, pero la validar la condición de while se retorna un falso, tomando en cuenta eso, es necesaio que x se inicialice con 2.
+12. Un String es inmutable, por lo que la función modify no modifica su valor. StringBuffer es mutable por lo que modify sí le concatena World al final, pero se reemplaza gran parte de la cadena con o, dejandolo como "Heo". StringBuilder también es mutable, así que modify le concatena World y la función reverse invierte la posición de sus carácteres.
