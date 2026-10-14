@@ -44,4 +44,38 @@
 
 22. Se imprime "Java Jeve va". Se crea una lista tipo Alpha, el cual inserta una instancia de esta y dos más instancias de subclases de Alpha. En un foreach se imprime la función mensaje, el cuál sobreescriben las subclases de Alpha. Cada instancia tiene su propia implementación de la función.
 
-23. 
+23. Se imprime Sound Roar Bark Growl. Se crean dos objetos Animal como referencia, pero uno apunta a un objeto Dog (subclase). El objeto animal ejecuta las funciones makeSound y makeSound con argumentos, después, el objeto dog ejecuta la sobreescritura de makeSound y después makeSound con argumentos (original de Animal).
+
+24. Primero se crea el objeto Cougar, el cuál ejecuta el construtor del mismo y a su vez se llama al constructor de la superclase (Feline) imprimiendo "feline cougar". Después se ejecuta el método go de la subclase, el cuál edita el valor de type que fue heredado de la superclase, por lo tanto la llamada a super.type hace la misma referencia a type, imprimiendo "c c".
+
+25. El atributo al que se accede depende del tipo de la referencia, como la referencia de myCar es ElectricCar se imprime "ElectricCar".
+
+26. Se genera error de compilación en la línea 18 porque el constructor de la subclase hace un llamado implícito al constructor sin argumentos de la superclase, el cual no existe porque se creó un constructor con argumentos.
+
+27. Al crearse un objeto Mountain, su constructor hace un llamado al constructor padre mandandole un string, este constructor hace un llamado al constructor de su padre, imprimiendo "atom granite". De regreso al contructor de Mountain, se crea un nuevo objeto Rock con el constructor con argumentos, imprimiendo nuevamente "atom granite".
+
+28. Se crea un objeto Y, el constructor llama a otro constructor de Y, este ejecuta un constructor de la superclase (X) que a su vez ejecuta otro constructor en la misma clase. Siguiendo la pila de prints, se muestra "1234".
+
+29. La opción d es la correcta, ya que primero creará el objeto Square, esto imprime "Shape: constructor". Después se ejecuta la función foo imprimiendo "Shape: foo". Finalmente, la función foo("bar") imprime "Square: foo".
+
+30. La opción d es la que genera la excepción porque el objeto al que apunta ob es un A, una subclase de esta, como B, no puede castearlo.
+
+31. Es válido apuntar una variable de referencia de una superclase a una subclase (upcast) sin necesidad de hacer un cast explícito. También se permite que una variable de referencia de una subclase apunte a una referencia de superclase mientras este apunte a un objeto real de la subclase (downcast), en este caso se debe hacer cast explícito obligatoriamente.
+
+32. La línea 12 genera error de compilación porque no se pueden castear clases que no tengan relación de herencia.
+
+33. Es válido que una referencia de Omega apunte a una referencia de Gamma si este apunta a un objeto Epsilon, ya que este hereda de Gamma e implementa Omega. Por lo mismo, también es válido que una referencia de Omega apunte a una referencia de Epsilon sin necesidad de casteo explícito.
+
+34. Cualquier objeto es instancia de la clase Object ya que todas clases heredan de él. Por lo tanto, también un objeto MyList es instancia de ArrayList.
+
+35. Se genera error de compilación porque el atributo a no existe en F. Los atributos se resuelven por el tipo de referencia, por eso f no reconoce a.
+
+36. Hay error de compilación en la línea 13 porque Sub no puede acceder a la variable a porque es privado en la superclase, además de que no existe un contructor vacío en la misma. Haciendo la llamada a super(5) o this(5) ya se resuelven ambos problemas.
+
+37. En la sobreescritura no se permite poner un modificador de acceso más estricto. En la sobrecarga se puede cambiar la firma (número de parámetros y tipos) de la función y el tipo de retorno. Una función con la misma firma y diferente tipo de retorno que la original genera error de compilación, no es ni sobrecarga ni sobreescritura.
+
+38. Las líneas 19 y 22 hacen de forma correcta el casteo, ya que con los parentesís se resuelve primero el cast y después se ejecuta la función. Una referencia de Speak que apunte a un objeto Tell (subclase de Speak) no puede ejecutar la función porque solo existe en Tell por la implementación de Truth, es por eso que se castea a Truth.
+
+39. Se ejecuta la función ejemplo para el objeto C, asi que se imprime "Valor de la clase C" y se suma la x de C. Sin embargo, como el tipo de referencia del objeto es A, no se realiza la suma porque los atributos se resuelven por el tipo de referencia, por lo que ac.x es el x de A, entonces no se resolvió la suma para A y se queda su valor en 8. Al final ac.x suma 20 y el resultado final es 28.
+
+40. La función speak de Animal es privado, por lo tanto, solo existe en esa clase y la función speak de Dog no es una sobreescritura, es una función propia de Dog. A pesar de que animal apunta a un objeto Dog, su tipo de referencia es Animal, por lo tanto ejecuta el speak de Animal, imprimiendo "Animals make noise".
